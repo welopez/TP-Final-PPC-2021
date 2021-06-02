@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Lighter_Grey"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="413dp"
+        android:layout_height="461dp"
+        android:layout_marginTop="270dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button_gRiesgo"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/Lightest_Blue"
+            android:textColor="@color/white"
+            android:onClick="goScreen2"
+            android:text="Grupo de Riesgo" />
+
+        <Button
+            android:id="@+id/button_infoPacientes"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:textColor="@color/white"
+            android:onClick="goScreen3"
+            android:backgroundTint="@color/Lightest_Blue"
+            android:text="Información para pacientes" />
+
+        <Button
+            android:id="@+id/button_cargaDatos"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:textColor="@color/white"
+            android:onClick="goScreen4"
+            android:backgroundTint="@color/Lightest_Blue"
+            android:text="Carga de Datos" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="269dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="92dp"
+        android:text="AyudAr"
+        android:autoSizeTextType="uniform"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:background="@color/bright_red"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
