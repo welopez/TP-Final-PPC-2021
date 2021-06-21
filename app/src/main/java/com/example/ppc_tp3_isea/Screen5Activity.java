@@ -11,6 +11,13 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,6 +26,7 @@ public class Screen5Activity extends AppCompatActivity {
 
     ImageView image_covid;
     Button button_send;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,28 @@ public class Screen5Activity extends AppCompatActivity {
                 sendImage5(image_covid);
             }
         });
+        queue = Volley.newRequestQueue(this);
+        cargarImagen(1.2,3,true);
+
+    }
+
+    private void cargarImagen(double riesgoRecurrente, double riesgoProgreso, boolean esquema){
+        String url = "http://ppc2021.edit.com.ar/service/api/imagen/";
+        ImageRequest request = new ImageRequest(url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema,
+                new Response.Listener() {
+                    @Override
+                    public void onResponse(Object response) {
+                        image_covid.setImageBitmap((Bitmap) response);
+
+                    }
+                }, 0, 0, null,
+                new Response.ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        //image_covid.setImageResource(R.drawable.covid);
+                        Toast.makeText(Screen5Activity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    }});
+        queue.add(request);
+
     }
 
     protected void sendImage5(ImageView image){
