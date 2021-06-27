@@ -41,7 +41,12 @@ public class Screen5Activity extends AppCompatActivity {
             }
         });
         queue = Volley.newRequestQueue(this);
-        cargarImagen(1.2,3,true);
+
+        Double riesgoRec = getIntent().getExtras().getDouble("riesgoRec");
+        Double riesgoProg = getIntent().getExtras().getDouble("riesgoProg");
+        Boolean esquema = getIntent().getExtras().getBoolean("esquema");
+
+        cargarImagen(riesgoRec, riesgoProg, esquema);
 
     }
 
@@ -58,7 +63,7 @@ public class Screen5Activity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
                         //image_covid.setImageResource(R.drawable.covid);
-                        Toast.makeText(Screen5Activity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Screen5Activity.this, "Error en respuesta: "+ url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
                     }});
         queue.add(request);
 

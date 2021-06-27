@@ -47,7 +47,7 @@ public class Screen2Activity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    textView2.setText("Error en respuesta: " + error.getMessage());
+                    textView2.setText("Error en respuesta: " + url + " -->" + error.getMessage());
                 }
             });
 

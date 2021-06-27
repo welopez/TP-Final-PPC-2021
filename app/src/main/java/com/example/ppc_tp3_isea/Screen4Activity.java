@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -29,6 +30,11 @@ public class Screen4Activity extends AppCompatActivity {
         ed3 = (EditText)findViewById(R.id.riesgoRecurrenteEditText);
         rad1 = (RadioButton)findViewById(R.id.radioButtonYes);
         rad2 = (RadioButton)findViewById(R.id.radioButtonNo);
+
+        InputFilter limitFilter = new MinMaxInputFilter(1, 10);
+        ed2.setFilters(new InputFilter[] { limitFilter });
+        ed3.setFilters(new InputFilter[] { limitFilter });
+
     }
 
     public void calculateRisk(View view){
@@ -38,7 +44,14 @@ public class Screen4Activity extends AppCompatActivity {
         } else if (rad2.isChecked()){
             selected_radiob = false;
         }
+
+        Bundle extras = new Bundle(); // Pasamos los datos necesarios para la siguiente activity.
+        extras.putDouble("riesgoProg", Double.parseDouble(ed2.getText().toString()));
+        extras.putDouble("riesgoRec", Double.parseDouble(ed3.getText().toString()));
+        extras.putBoolean("esquema", rad1.isChecked());
+
         Intent goact5 = new Intent(this, Screen5Activity.class);
+        goact5.putExtras(extras);
         startActivity(goact5);
     }
 }
