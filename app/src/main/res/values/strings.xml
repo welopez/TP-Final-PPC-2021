@@ -99,5 +99,9 @@ Evitar el contacto cercano con personas que tengan enfermedades respiratorias.
 No se recomienda el uso de barbijos.
 
 No concurrir a lugares de concentración de personas.</string>
+    <string name="bottom_nav_inicio">Inicio</string>
+    <string name="bottom_nav_riesgo">Grupo de Riesgo</string>
+    <string name="bottom_nav_info">Info. Paciente</string>
+    <string name="bottom_nav_carga">Carga de datos</string>
 
 </resources>
