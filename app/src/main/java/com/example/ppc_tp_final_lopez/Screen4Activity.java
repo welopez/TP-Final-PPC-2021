@@ -1,4 +1,4 @@
-package com.example.ppc_tp3_isea;
+package com.example.ppc_tp_final_lopez;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,6 @@ import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
-
-import com.android.volley.RequestQueue;
 
 public class Screen4Activity extends AppCompatActivity {
 

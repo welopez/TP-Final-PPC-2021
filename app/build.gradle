@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.ppc_tp3_isea"
+        applicationId "com.example.ppc_tp_final_lopez"
         minSdkVersion 27
         targetSdkVersion 30
         versionCode 1

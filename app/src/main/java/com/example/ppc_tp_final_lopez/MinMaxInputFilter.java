@@ -1,9 +1,8 @@
-package com.example.ppc_tp3_isea;
+package com.example.ppc_tp_final_lopez;
 
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 public class MinMaxInputFilter implements InputFilter {
     private double mMinValue;

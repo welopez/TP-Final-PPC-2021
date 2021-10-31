@@ -1,4 +1,4 @@
-package com.example.ppc_tp3_isea;
+package com.example.ppc_tp_final_lopez;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,5 +34,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(act5);
     }
 
-    //texto agregado para poder hacer primer commit
 }

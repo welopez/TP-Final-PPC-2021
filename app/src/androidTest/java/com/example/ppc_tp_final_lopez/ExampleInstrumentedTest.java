@@ -1,4 +1,4 @@
-package com.example.ppc_tp3_isea;
+package com.example.ppc_tp_final_lopez;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.ppc_tp3_isea", appContext.getPackageName());
+        assertEquals("com.example.ppc_tp_final_lopez", appContext.getPackageName());
     }
 }
