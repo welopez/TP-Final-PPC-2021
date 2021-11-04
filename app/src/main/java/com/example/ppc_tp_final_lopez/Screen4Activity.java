@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class Screen4Activity extends AppCompatActivity {
 
     private EditText ed1;
@@ -19,6 +21,7 @@ public class Screen4Activity extends AppCompatActivity {
     private RadioButton rad1;
     private RadioButton rad2;
     private Boolean selected_radiob;
+    private BottomNavigationView bottomNavigationView;
 
     Context context = this;
     SharedPreferences sharedPrefs;
@@ -32,33 +35,35 @@ public class Screen4Activity extends AppCompatActivity {
         sharedPrefs = getSharedPreferences("ArchivoSP", context.MODE_PRIVATE);
 
 
-        ed1 = (EditText)findViewById(R.id.pacienteEditText);
-        ed2 = (EditText)findViewById(R.id.riesgoEditText);
-        ed3 = (EditText)findViewById(R.id.riesgoRecurrenteEditText);
-        rad1 = (RadioButton)findViewById(R.id.radioButtonYes);
-        rad2 = (RadioButton)findViewById(R.id.radioButtonNo);
+        ed1 = (EditText) findViewById(R.id.pacienteEditText);
+        ed2 = (EditText) findViewById(R.id.riesgoEditText);
+        ed3 = (EditText) findViewById(R.id.riesgoRecurrenteEditText);
+        rad1 = (RadioButton) findViewById(R.id.radioButtonYes);
+        rad2 = (RadioButton) findViewById(R.id.radioButtonNo);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
+        bottomNavigationView.setSelectedItemId(R.id.page_carga);
         ed1.setText(sharedPrefs.getString("Paciente", ""));
         ed2.setText(sharedPrefs.getString("RiesgoProg", ""));
         ed3.setText(sharedPrefs.getString("RiesgoRec", ""));
-        if(sharedPrefs.getBoolean("Esquema", false) == true){
+        if (sharedPrefs.getBoolean("Esquema", false) == true) {
             rad1.setChecked(true);
-        }else{
+        } else {
             rad2.setChecked(true);
         }
 
 
         InputFilter limitFilter = new MinMaxInputFilter(1, 10);
-        ed2.setFilters(new InputFilter[] { limitFilter });
-        ed3.setFilters(new InputFilter[] { limitFilter });
+        ed2.setFilters(new InputFilter[]{limitFilter});
+        ed3.setFilters(new InputFilter[]{limitFilter});
 
     }
 
-    public void calculateRisk(View view){
+    public void calculateRisk(View view) {
 
-        if (rad1.isChecked()){
+        if (rad1.isChecked()) {
             selected_radiob = true;
-        } else if (rad2.isChecked()){
+        } else if (rad2.isChecked()) {
             selected_radiob = false;
         }
 

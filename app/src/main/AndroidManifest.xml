@@ -12,11 +12,20 @@
         android:roundIcon="@mipmap/icono_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.temaApp">
-        <activity android:name="com.example.ppc_tp_final_lopez.Screen5Activity"></activity>
-        <activity android:name="com.example.ppc_tp_final_lopez.Screen4Activity" />
-        <activity android:name="com.example.ppc_tp_final_lopez.Screen3Activity" />
-        <activity android:name="com.example.ppc_tp_final_lopez.Screen2Activity" />
-        <activity android:name="com.example.ppc_tp_final_lopez.MainActivity">
+        <activity
+            android:name="com.example.ppc_tp_final_lopez.Screen5Activity"
+            android:label="Imagen" />
+        <activity
+            android:name="com.example.ppc_tp_final_lopez.Screen4Activity"
+            android:label="Carga de datos" />
+        <activity
+            android:name="com.example.ppc_tp_final_lopez.Screen3Activity"
+            android:label="Información para pacientes" />
+        <activity
+            android:name="com.example.ppc_tp_final_lopez.Screen2Activity"
+            android:label="Grupo de riesgo" />
+        <activity
+            android:name="com.example.ppc_tp_final_lopez.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -16,13 +16,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
 public class Screen2Activity extends AppCompatActivity {
 
-    TextView textView2;
-    RequestQueue queue;
+    private BottomNavigationView bottomNavigationView;
+    private TextView textView2;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +32,13 @@ public class Screen2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_screen2);
 
         textView2 = (TextView) findViewById(R.id.textView2);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.page_riesgo);
 
         // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
-        String url ="http://ppc2021.edit.com.ar/service/api/info";
+        String url = "http://ppc2021.edit.com.ar/service/api/info";
 
         if (checkOnlineState() == true) {
             // Request a JSON response from the provided URL.
@@ -52,23 +57,23 @@ public class Screen2Activity extends AppCompatActivity {
 
             // Add the request to the RequestQueue.
             queue.add(jsonObjectRequest);
-        }else{
+        } else {
             textView2.setText("No hay conexión a internet.");
         }
     }
 
-    public void goScreen4Calculate(View view){
+    public void goScreen4Calculate(View view) {
         Intent act4 = new Intent(this, Screen4Activity.class);
         startActivity(act4);
     }
 
     public boolean checkOnlineState() {
         ConnectivityManager CManager =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo nInfo = CManager.getActiveNetworkInfo();
         if (nInfo != null && nInfo.isConnectedOrConnecting()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

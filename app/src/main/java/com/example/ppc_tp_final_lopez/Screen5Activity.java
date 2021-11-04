@@ -36,7 +36,7 @@ public class Screen5Activity extends AppCompatActivity {
         button_send = findViewById(R.id.buttonSend);
         button_send.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 sendImage5(image_covid);
             }
         });
@@ -50,7 +50,7 @@ public class Screen5Activity extends AppCompatActivity {
 
     }
 
-    private void cargarImagen(double riesgoRecurrente, double riesgoProgreso, boolean esquema){
+    private void cargarImagen(double riesgoRecurrente, double riesgoProgreso, boolean esquema) {
         String url = "http://ppc2021.edit.com.ar/service/api/imagen/";
         ImageRequest request = new ImageRequest(url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema,
                 new Response.Listener() {
@@ -63,19 +63,20 @@ public class Screen5Activity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
                         //image_covid.setImageResource(R.drawable.covid);
-                        Toast.makeText(Screen5Activity.this, "Error en respuesta: "+ url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }});
+                        Toast.makeText(Screen5Activity.this, "Error en respuesta: " + url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
         queue.add(request);
 
     }
 
-    protected void sendImage5(ImageView image){
+    protected void sendImage5(ImageView image) {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        BitmapDrawable drawable = (BitmapDrawable)image.getDrawable();
+        BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-        File f = new File(getExternalCacheDir()+"/"+getResources().getString(R.string.app_name)+".png");
+        File f = new File(getExternalCacheDir() + "/" + getResources().getString(R.string.app_name) + ".png");
         Intent shareintent;
 
         try {
@@ -90,7 +91,7 @@ public class Screen5Activity extends AppCompatActivity {
             shareintent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
             shareintent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException();
         }
         startActivity(Intent.createChooser(shareintent, "Share Image"));
