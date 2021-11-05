@@ -10,6 +10,7 @@ import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -34,15 +35,13 @@ public class Screen4Activity extends AppCompatActivity {
         //Para guardar en memoria no volatil
         sharedPrefs = getSharedPreferences("ArchivoSP", context.MODE_PRIVATE);
 
-
+        iniciarMenuInf();
         ed1 = (EditText) findViewById(R.id.pacienteEditText);
         ed2 = (EditText) findViewById(R.id.riesgoEditText);
         ed3 = (EditText) findViewById(R.id.riesgoRecurrenteEditText);
         rad1 = (RadioButton) findViewById(R.id.radioButtonYes);
         rad2 = (RadioButton) findViewById(R.id.radioButtonNo);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setSelectedItemId(R.id.page_carga);
         ed1.setText(sharedPrefs.getString("Paciente", ""));
         ed2.setText(sharedPrefs.getString("RiesgoProg", ""));
         ed3.setText(sharedPrefs.getString("RiesgoRec", ""));
@@ -88,5 +87,58 @@ public class Screen4Activity extends AppCompatActivity {
         Intent goact5 = new Intent(this, Screen5Activity.class);
         goact5.putExtras(extras);
         startActivity(goact5);
+    }
+
+    private void iniciarMenuInf(){
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        //Seteo el boton inicio como seleccionado
+        bottomNavigationView.setSelectedItemId(R.id.page_carga);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.page_inicio:
+                    goMain();
+                    break;
+                case R.id.page_riesgo:
+                    goScreen2();
+                    break;
+                case R.id.page_info:
+                    goScreen3();
+                    break;
+                case R.id.page_carga:
+                    break;
+
+                default:
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    "Icono no encontrado", Toast.LENGTH_LONG);
+                    toast1.show();
+            }
+            return true;
+        });
+    }
+
+    public void goMain() {
+        Intent act1 = new Intent(this, MainActivity.class);
+        startActivity(act1);
+    }
+
+    public void goScreen2() {
+        Intent act2 = new Intent(this, Screen2Activity.class);
+        startActivity(act2);
+    }
+
+    public void goScreen3() {
+        Intent act3 = new Intent(this, Screen3Activity.class);
+        startActivity(act3);
+    }
+
+    public void goScreen4() {
+        Intent act4 = new Intent(this, Screen4Activity.class);
+        startActivity(act4);
+    }
+
+    public void goScreen5() {
+        Intent act5 = new Intent(this, Screen5Activity.class);
+        startActivity(act5);
     }
 }

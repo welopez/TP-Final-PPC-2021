@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="10dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/pacienteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="20dp"
                 android:textSize="20dp"
                 android:text="Paciente"
                 android:textColor="@color/black" />
@@ -43,7 +43,7 @@
                 android:id="@+id/pacienteEditText"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:autoSizeTextType="uniform"
                 android:ems="10"
                 android:inputType="textPersonName" />
@@ -61,7 +61,7 @@
                 android:id="@+id/riesgoEditText"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:autoSizeTextType="uniform"
                 android:ems="10"
                 android:inputType="numberDecimal" />
@@ -79,7 +79,7 @@
                 android:id="@+id/riesgoRecurrenteEditText"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:autoSizeTextType="uniform"
                 android:ems="10"
                 android:inputType="numberDecimal" />
@@ -96,16 +96,16 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup"
-                android:layout_width="158dp"
-                android:layout_height="130dp"
-                android:layout_marginTop="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <RadioButton
                     android:id="@+id/radioButtonYes"
                     android:layout_width="80dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:text="Si"
                     android:textSize="20sp" />
 
@@ -113,8 +113,6 @@
                     android:id="@+id/radioButtonNo"
                     android:layout_width="85dp"
                     android:layout_height="42dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:text="No"
                     android:textSize="20sp" />
 

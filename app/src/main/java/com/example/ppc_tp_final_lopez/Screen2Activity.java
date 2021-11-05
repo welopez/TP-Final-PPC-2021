@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,9 +33,7 @@ public class Screen2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_screen2);
 
         textView2 = (TextView) findViewById(R.id.textView2);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
-        bottomNavigationView.setSelectedItemId(R.id.page_riesgo);
+        iniciarMenuInf();
 
         // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
@@ -60,6 +59,35 @@ public class Screen2Activity extends AppCompatActivity {
         } else {
             textView2.setText("No hay conexión a internet.");
         }
+
+    }
+
+    private void iniciarMenuInf(){
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        //Seteo el boton inicio como seleccionado
+        bottomNavigationView.setSelectedItemId(R.id.page_riesgo);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.page_inicio:
+                    goMain();
+                    break;
+                case R.id.page_riesgo:
+                    break;
+                case R.id.page_info:
+                    goScreen3();
+                    break;
+                case R.id.page_carga:
+                    goScreen4();
+                    break;
+
+                default:
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    "Icono no encontrado", Toast.LENGTH_LONG);
+                    toast1.show();
+            }
+            return true;
+        });
     }
 
     public void goScreen4Calculate(View view) {
@@ -76,5 +104,30 @@ public class Screen2Activity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    public void goMain() {
+        Intent act1 = new Intent(this, MainActivity.class);
+        startActivity(act1);
+    }
+
+    public void goScreen2() {
+        Intent act2 = new Intent(this, Screen2Activity.class);
+        startActivity(act2);
+    }
+
+    public void goScreen3() {
+        Intent act3 = new Intent(this, Screen3Activity.class);
+        startActivity(act3);
+    }
+
+    public void goScreen4() {
+        Intent act4 = new Intent(this, Screen4Activity.class);
+        startActivity(act4);
+    }
+
+    public void goScreen5() {
+        Intent act5 = new Intent(this, Screen5Activity.class);
+        startActivity(act5);
     }
 }
