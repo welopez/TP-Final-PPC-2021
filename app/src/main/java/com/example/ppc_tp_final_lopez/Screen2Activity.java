@@ -64,7 +64,7 @@ public class Screen2Activity extends AppCompatActivity {
 
     private void iniciarMenuInf(){
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        //Seteo el boton inicio como seleccionado
+        //Seteo el boton riesgo como seleccionado
         bottomNavigationView.setSelectedItemId(R.id.page_riesgo);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){

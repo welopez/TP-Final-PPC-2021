@@ -125,7 +125,7 @@ public class Screen4Activity extends AppCompatActivity {
 
     private void iniciarMenuInf(){
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        //Seteo el boton inicio como seleccionado
+        //Seteo el boton carga como seleccionado
         bottomNavigationView.setSelectedItemId(R.id.page_carga);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
