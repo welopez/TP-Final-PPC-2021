@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Lighter_Grey"
-    tools:context=".Screen4Activity">
+    tools:context=".Screen4Activity"
+    android:focusableInTouchMode="true">
 
     <!--<com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

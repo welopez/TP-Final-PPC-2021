@@ -8,6 +8,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,13 @@ public class Screen5Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen5);
+
+        //Para que aparezca el boton atras en la actionBar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        }
         image_covid = findViewById(R.id.imageCovid);
         button_send = findViewById(R.id.buttonSend);
         button_send.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +71,7 @@ public class Screen5Activity extends AppCompatActivity {
                 }, 0, 0, null,
                 new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
-                        //image_covid.setImageResource(R.drawable.covid);
+                        image_covid.setImageResource(R.drawable.error);
                         Toast.makeText(Screen5Activity.this, "Error en respuesta: " + url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
@@ -95,5 +104,17 @@ public class Screen5Activity extends AppCompatActivity {
             throw new RuntimeException();
         }
         startActivity(Intent.createChooser(shareintent, "Share Image"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: //hago un case por si en un futuro agrego mas opciones
+                Log.i("ActionBar", "Atrás");
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

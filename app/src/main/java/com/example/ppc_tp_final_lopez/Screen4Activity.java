@@ -59,34 +59,68 @@ public class Screen4Activity extends AppCompatActivity {
     }
 
     public void calculateRisk(View view) {
+        //Si los inputs estan cargados...
+        if (verificarInputs()){
+            if (rad1.isChecked()) {
+                selected_radiob = true;
+            } else if (rad2.isChecked()) {
+                selected_radiob = false;
+            }
 
-        if (rad1.isChecked()) {
-            selected_radiob = true;
-        } else if (rad2.isChecked()) {
-            selected_radiob = false;
+            Double riesgoProg = Double.parseDouble(ed2.getText().toString());
+            Double riesgoRec = Double.parseDouble(ed3.getText().toString());
+            Boolean esquema = rad1.isChecked();
+
+            //Guardamos datos en memoria no volatil
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("Paciente", ed1.getText().toString());
+            editor.putString("RiesgoProg", ed2.getText().toString());
+            editor.putString("RiesgoRec", ed3.getText().toString());
+            editor.putBoolean("Esquema", esquema);
+            editor.commit();
+
+            // Pasamos los datos necesarios para la siguiente activity.
+            Bundle extras = new Bundle();
+            extras.putDouble("riesgoProg", riesgoProg);
+            extras.putDouble("riesgoRec", riesgoRec);
+            extras.putBoolean("esquema", esquema);
+
+            Intent goact5 = new Intent(this, Screen5Activity.class);
+            goact5.putExtras(extras);
+            startActivity(goact5);
         }
 
-        Double riesgoProg = Double.parseDouble(ed2.getText().toString());
-        Double riesgoRec = Double.parseDouble(ed3.getText().toString());
-        Boolean esquema = rad1.isChecked();
+    }
 
-        //Guardamos datos en memoria no volatil
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString("Paciente", ed1.getText().toString());
-        editor.putString("RiesgoProg", ed2.getText().toString());
-        editor.putString("RiesgoRec", ed3.getText().toString());
-        editor.putBoolean("Esquema", esquema);
-        editor.commit();
+    private boolean verificarInputs() {
+        if(ed1.getText().toString().isEmpty()) {
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Ingrese el paciente", Toast.LENGTH_LONG);
+            toast1.show();
+            return false;
+        }else if(ed2.getText().toString().isEmpty()){
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Ingrese el riesgo del progreso", Toast.LENGTH_LONG);
+            toast1.show();
+            return false;
 
-        // Pasamos los datos necesarios para la siguiente activity.
-        Bundle extras = new Bundle();
-        extras.putDouble("riesgoProg", riesgoProg);
-        extras.putDouble("riesgoRec", riesgoRec);
-        extras.putBoolean("esquema", esquema);
+        }else if (ed3.getText().toString().isEmpty()){
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Ingrese el riesgo recurrente", Toast.LENGTH_LONG);
+            toast1.show();
+            return false;
 
-        Intent goact5 = new Intent(this, Screen5Activity.class);
-        goact5.putExtras(extras);
-        startActivity(goact5);
+        }else if (!rad1.isChecked() && !rad2.isChecked()){
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Seleccione el esquema", Toast.LENGTH_LONG);
+            toast1.show();
+            return false;
+
+        }else return true;
     }
 
     private void iniciarMenuInf(){
