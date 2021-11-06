@@ -41,6 +41,7 @@
                 android:id="@+id/button_Photo1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/Lightest_Blue"
                 android:text="@string/send"
                 android:textColor="@color/white" />
@@ -56,6 +57,7 @@
                 android:id="@+id/button_Photo2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/Lightest_Blue"
                 android:text="@string/send"
                 android:textColor="@color/white" />
@@ -71,6 +73,7 @@
                 android:id="@+id/button_Photo3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/Lightest_Blue"
                 android:text="@string/send"
                 android:textColor="@color/white" />
@@ -86,6 +89,7 @@
                 android:id="@+id/button_Photo4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/Lightest_Blue"
                 android:text="@string/send"
                 android:textColor="@color/white" />
@@ -101,6 +105,7 @@
                 android:id="@+id/button_Photo5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/Lightest_Blue"
                 android:text="@string/send"
                 android:textColor="@color/white" />
