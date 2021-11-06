@@ -151,6 +151,13 @@ public class Screen4Activity extends AppCompatActivity {
         });
     }
 
+    //Metodo para que al volver se seleccione el icono correspondiente en el menu
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        bottomNavigationView.setSelectedItemId(R.id.page_carga);
+    }
+
     public void goMain() {
         Intent act1 = new Intent(this, MainActivity.class);
         startActivity(act1);

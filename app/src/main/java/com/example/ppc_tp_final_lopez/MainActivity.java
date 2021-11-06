@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Metodo para que al volver se seleccione el icono correspondiente en el menu
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        bottomNavigationView.setSelectedItemId(R.id.page_inicio);
+    }
+
     public void goScreen2(View view) {
         Intent act2 = new Intent(this, Screen2Activity.class);
         startActivity(act2);
