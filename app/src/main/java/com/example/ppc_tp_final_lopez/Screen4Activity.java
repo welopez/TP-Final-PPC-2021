@@ -21,7 +21,6 @@ public class Screen4Activity extends AppCompatActivity {
     private EditText ed3;
     private RadioButton rad1;
     private RadioButton rad2;
-    private Boolean selected_radiob;
     private BottomNavigationView bottomNavigationView;
 
     Context context = this;
@@ -61,12 +60,6 @@ public class Screen4Activity extends AppCompatActivity {
     public void calculateRisk(View view) {
         //Si los inputs estan cargados...
         if (verificarInputs()){
-            if (rad1.isChecked()) {
-                selected_radiob = true;
-            } else if (rad2.isChecked()) {
-                selected_radiob = false;
-            }
-
             Double riesgoProg = Double.parseDouble(ed2.getText().toString());
             Double riesgoRec = Double.parseDouble(ed3.getText().toString());
             Boolean esquema = rad1.isChecked();
