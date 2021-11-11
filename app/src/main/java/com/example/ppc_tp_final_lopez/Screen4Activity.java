@@ -31,7 +31,7 @@ public class Screen4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen4);
 
-        //Para guardar en memoria no volatil
+        //Para obtener los datos guardados
         sharedPrefs = getSharedPreferences("ArchivoSP", context.MODE_PRIVATE);
 
         iniciarMenuInf();

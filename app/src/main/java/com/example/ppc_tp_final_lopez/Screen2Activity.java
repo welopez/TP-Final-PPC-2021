@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Screen2Activity extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class Screen2Activity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
-        String url = "http://ppc2021.edit.com.ar/service/api/info";
+        String url = "https://ppc2021.edit.com.ar/service/api/info";
 
         if (checkOnlineState() == true) {
             // Request a JSON response from the provided URL.
@@ -45,13 +46,19 @@ public class Screen2Activity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            textView2.setText(response.toString());
+                            try {
+                                String texto = response.getString("result");
+                                textView2.setText(texto);
+                            } catch (JSONException e) {
+                                textView2.setText("La respuesta JSON no se pudo procesar");
+                                e.printStackTrace();
+                            }
                         }
                     }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    textView2.setText("Error en respuesta: " + url + " -->" + error.getMessage());
-                }
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        textView2.setText("Error en respuesta: " + url + " -->" + error.getMessage());
+                    }
             });
 
             // Add the request to the RequestQueue.
@@ -62,12 +69,12 @@ public class Screen2Activity extends AppCompatActivity {
 
     }
 
-    private void iniciarMenuInf(){
+    private void iniciarMenuInf() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         //Seteo el boton riesgo como seleccionado
         bottomNavigationView.setSelectedItemId(R.id.page_riesgo);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.page_inicio:
                     goMain();
                     break;

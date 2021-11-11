@@ -2,9 +2,12 @@ package com.example.ppc_tp_final_lopez;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,11 +18,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +44,7 @@ public class Screen5Activity extends AppCompatActivity {
         setContentView(R.layout.activity_screen5);
 
         //Para que aparezca el boton atras en la actionBar
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -60,23 +68,60 @@ public class Screen5Activity extends AppCompatActivity {
     }
 
     private void cargarImagen(double riesgoRecurrente, double riesgoProgreso, boolean esquema) {
-        String url = "http://ppc2021.edit.com.ar/service/api/imagen/";
-        ImageRequest request = new ImageRequest(url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema,
-                new Response.Listener() {
-                    @Override
-                    public void onResponse(Object response) {
-                        image_covid.setImageBitmap((Bitmap) response);
+        //Obtener la url de la imagen
+        String url = "https://ppc2021.edit.com.ar/service/api/imagen/";
+        String uri = url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema;
+        Log.e("Uri para obtener url imagen: ", uri);
 
+        if (checkOnlineState() == true) {
+            // Request a JSON response from the provided URL.
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, uri, null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String urlImagen = response.getString("imagen");
+                                Log.i("Url imagen: ", urlImagen);
+                                setearImagen(urlImagen);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        image_covid.setImageResource(R.drawable.error);
+                        Toast.makeText(Screen5Activity.this, "Error en respuesta: " + uri + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
                     }
-                }, 0, 0, null,
+            });
+
+            // Add the request to the RequestQueue.
+            queue.add(jsonObjectRequest);
+
+        } else {
+            Toast.makeText(Screen5Activity.this, "No hay conexión a internet", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void setearImagen(String urlImagen) {
+        //Obtener y setear la imagen.
+        ImageRequest request = new ImageRequest(urlImagen,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        image_covid.setImageBitmap(response);
+                    }
+                }, 0, 0, ImageView.ScaleType.CENTER_CROP, null,
                 new Response.ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
                         image_covid.setImageResource(R.drawable.error);
-                        Toast.makeText(Screen5Activity.this, "Error en respuesta: " + url + riesgoRecurrente + "/" + riesgoProgreso + "/" + esquema + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Screen5Activity.this, "Error en respuesta: " + urlImagen + " -->" + error.getMessage(), Toast.LENGTH_LONG).show();
+                        error.printStackTrace();
                     }
                 });
         queue.add(request);
-
     }
 
     protected void sendImage5(ImageView image) {
@@ -106,6 +151,18 @@ public class Screen5Activity extends AppCompatActivity {
         startActivity(Intent.createChooser(shareintent, "Share Image"));
     }
 
+    public boolean checkOnlineState() {
+        ConnectivityManager CManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nInfo = CManager.getActiveNetworkInfo();
+        if (nInfo != null && nInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Para agregar funcionalidad de ir atras en el boton del action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
